@@ -8,8 +8,9 @@ get_header();
         <textarea name="message" rows="8" cols="80"></textarea>
     </label>
     <input type="submit" name="ok" value="ok">
-
 </form>
+
+
 <?php
 
     if (isset( $_POST['ok'])  && $_POST['message'] != "") {

@@ -11,7 +11,6 @@
  *
  * @package cv2
  */
-
  get_header();
  ?>
  <?php
@@ -19,13 +18,18 @@
 
  $mycategories = get_categories();
  ?>
-    <ul id="nav-bar">
-        <button id="button-nav" type="button" name="button">menu</button>
+     <button id="button" type="button" name="button" class="glyphicon glyphicon-align-justify"></button>
+     <ul id="nav-bar">
     <?php
-    foreach ( $mycategories as $cat) :?>
+    foreach ( $mycategories as $cat) :
+        if ($cat->name == "contact") :
+            ?>
+            <li><a href="<?php echo get_page_link((52)) ?>"><?php echo $cat->name ?></a></li>
 
+        <?php else: ?>
             <li><a href="#<?php echo get_cat_ID($cat->name) ?>"><?php echo $cat->name ?></a></li>
         <?php
+        endif;
     endforeach;
      ?>
      </ul>
@@ -34,7 +38,7 @@
      <?php
 
         foreach ( $mycategories as $cat) :?>
-            <h2 id=<?php echo get_cat_ID($cat->name) ?> ><?php echo $cat->name;?></h2>
+            <h2 id=<?php echo get_cat_ID($cat->name) ?> ><?php echo $cat->name;?>:</h2>
             <?php
             $args = array(
                 'posts_per_page'   => 5,
@@ -46,13 +50,14 @@
             $myposts = get_posts( $args );
             foreach ( $myposts as $post ) : ?>
                 <h1><?php echo $post->name;?></h1>
-                <li><a href="<?php echo get_permalink();  ?>"><?php echo $post->post_title; ?></a></li>
                 <p><?php echo $post->post_content ?></p>
                 <?php the_meta(); ?>
+                <li><a href="<?php echo get_permalink();  ?>">lien vers: <?php echo $post->post_title; ?></a></li>
             <?php
             endforeach;
         endforeach;
         ?>
+
         </main>
         <?php
         echo get_num_queries();
